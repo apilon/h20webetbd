@@ -10,7 +10,7 @@ function getBdd() {
 // Renvoie la liste de tous les articles, triés par identifiant décroissant
 function getArticles() {
     $bdd = getBdd();
-    $articles = $bdd->query('select * from Articles'
+    $articles = $bdd->query('select * from articles'
             . ' order by ID desc');
     return $articles;
 }
@@ -26,7 +26,7 @@ function setArticle($article) {
 // Renvoie les informations sur un article
 function getArticle($idArticle) {
     $bdd = getBdd();
-    $article = $bdd->prepare('select * from Articles'
+    $article = $bdd->prepare('select * from articles'
             . ' where ID=?');
     $article->execute(array($idArticle));
     if ($article->rowCount() == 1)
@@ -38,7 +38,7 @@ function getArticle($idArticle) {
 // Renvoie la liste des commentaires associés à un article
 function getCommentaires($idArticle) {
     $bdd = getBdd();
-    $commentaires = $bdd->prepare('select * from Commentaires'
+    $commentaires = $bdd->prepare('select * from commentaires'
             . ' where article_id = ?');
     $commentaires->execute(array($idArticle));
     return $commentaires;
@@ -47,7 +47,7 @@ function getCommentaires($idArticle) {
 // Renvoie un commentaire spécifique
 function getCommentaire($id) {
     $bdd = getBdd();
-    $commentaire = $bdd->prepare('select * from Commentaires'
+    $commentaire = $bdd->prepare('select * from commentaires'
             . ' where id = ?');
     $commentaire->execute(array($id));
     if ($commentaire->rowCount() == 1)
@@ -59,11 +59,16 @@ function getCommentaire($id) {
 
 // Supprime un commentaire
 function deleteCommentaire($id) {
-    $bdd = getBdd();
-    $result = $bdd->prepare('DELETE FROM Commentaires'
-            . ' WHERE id = ?');
-    $result->execute(array($id));
-    return $result;
+    if ($public) {
+        echo "<script>alert('Cette opération n'est pas permise en mode démonstration');</script>";
+        return true;
+    } else {
+        $bdd = getBdd();
+        $result = $bdd->prepare('DELETE FROM commentaires'
+                . ' WHERE id = ?');
+        $result->execute(array($id));
+        return $result;
+    }
 }
 
 // Ajoute un commentaire associés à un article
@@ -77,7 +82,7 @@ function setCommentaire($commentaire) {
 // Recherche les types répondant à l'autocomplete
 function searchType($term) {
     $conn = getBdd();
-    $stmt = $conn->prepare('SELECT type FROM Types WHERE type LIKE :term');
+    $stmt = $conn->prepare('SELECT type FROM types WHERE type LIKE :term');
     $stmt->execute(array('term' => '%' . $term . '%'));
 
     while ($row = $stmt->fetch()) {

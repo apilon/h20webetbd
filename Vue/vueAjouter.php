@@ -1,4 +1,4 @@
-<?php $titre = "Le Blogue du prof - " . $article['titre']; ?>
+<?php $titre = "Le Blogue du prof - Ajouter un article"; ?>
 
 <?php ob_start(); ?>
 <header>

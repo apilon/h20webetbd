@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 12 Mars 2018 à 20:56
+-- Généré le :  Mar 31 Mars 2020 à 12:06
 -- Version du serveur :  5.6.37
--- Version de PHP :  5.6.30
+-- Version de PHP :  7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,16 +17,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `Blogue`
+-- Base de données :  `Blogue-vers-MVC-v1_0_0_0`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Articles`
+-- Structure de la table `articles`
 --
 
-CREATE TABLE IF NOT EXISTS `Articles` (
+CREATE TABLE IF NOT EXISTS `articles` (
   `id` int(11) NOT NULL,
   `titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sous_titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -34,23 +34,24 @@ CREATE TABLE IF NOT EXISTS `Articles` (
   `date` date NOT NULL,
   `texte` text COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `Articles`
+-- Contenu de la table `articles`
 --
 
-INSERT INTO `Articles` (`id`, `titre`, `sous_titre`, `utilisateur_id`, `date`, `texte`, `type`) VALUES
+INSERT INTO `articles` (`id`, `titre`, `sous_titre`, `utilisateur_id`, `date`, `texte`, `type`) VALUES
 (1, 'Premier article', 'Premier sous-titre', 1, '2018-01-24', 'Texte du premier article', 'un type'),
-(2, 'Deuxième article', 'Deuxième sous-titre', 1, '2018-02-26', 'Texte du deuxième article', 'un type');
+(2, 'Deuxième article', 'Deuxième sous-titre', 1, '2018-02-26', 'Texte du deuxième article', 'un type'),
+(3, 'article ajouté', 's-t ajouté', 1, '2020-03-30', 'texte ajouté', 'PHP');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Commentaires`
+-- Structure de la table `commentaires`
 --
 
-CREATE TABLE IF NOT EXISTS `Commentaires` (
+CREATE TABLE IF NOT EXISTS `commentaires` (
   `id` int(11) NOT NULL,
   `article_id` int(11) NOT NULL,
   `date` date NOT NULL,
@@ -58,36 +59,37 @@ CREATE TABLE IF NOT EXISTS `Commentaires` (
   `titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `texte` text COLLATE utf8_unicode_ci NOT NULL,
   `prive` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `Commentaires`
+-- Contenu de la table `commentaires`
 --
 
-INSERT INTO `Commentaires` (`id`, `article_id`, `date`, `auteur`, `titre`, `texte`, `prive`) VALUES
+INSERT INTO `commentaires` (`id`, `article_id`, `date`, `auteur`, `titre`, `texte`, `prive`) VALUES
 (5, 1, '2018-01-24', 'Moi mod.', 'Mon commentaire mod.', 'Voici mon commentaire modifié', 1),
 (7, 1, '2018-01-29', 'Lui mod.', 'Son commentaire mod.', 'Voici son commentaire modifié', 1),
 (9, 2, '2018-01-30', 'Nous', 'notre commentaire', 'Le texte de notre commentaire', 1),
 (10, 2, '2018-02-01', 'Vous', 'Votre commentaire', 'Le texte de votre commentaire', 0),
 (23, 1, '2018-03-12', 'Toi', 'Ton commentaire', 'Le texte de ton commentaire', 1),
-(29, 2, '2018-03-12', 'a@b.c', 'Test de courriel', 'Commentaire d''un auteur avec courriel', 1);
+(29, 2, '2018-03-12', 'a@b.c', 'Test de courriel', 'commentaire d''un auteur avec courriel', 1),
+(30, 3, '2020-03-30', 'a@b.c', 'courriel valide', 'test du courriel', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Types`
+-- Structure de la table `types`
 --
 
-CREATE TABLE IF NOT EXISTS `Types` (
+CREATE TABLE IF NOT EXISTS `types` (
   `id` int(11) NOT NULL,
   `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `Types`
+-- Contenu de la table `types`
 --
 
-INSERT INTO `Types` (`id`, `type`) VALUES
+INSERT INTO `types` (`id`, `type`) VALUES
 (1, 'ActionScript'),
 (2, 'AppleScript'),
 (3, 'Asp'),
@@ -114,10 +116,10 @@ INSERT INTO `Types` (`id`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Utilisateurs`
+-- Structure de la table `utilisateurs`
 --
 
-CREATE TABLE IF NOT EXISTS `Utilisateurs` (
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `id` int(11) NOT NULL,
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `identifiant` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -125,10 +127,10 @@ CREATE TABLE IF NOT EXISTS `Utilisateurs` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `Utilisateurs`
+-- Contenu de la table `utilisateurs`
 --
 
-INSERT INTO `Utilisateurs` (`id`, `nom`, `identifiant`, `mot_de_passe`) VALUES
+INSERT INTO `utilisateurs` (`id`, `nom`, `identifiant`, `mot_de_passe`) VALUES
 (1, 'André Pilon', 'apilon', 'prof');
 
 --
@@ -136,29 +138,29 @@ INSERT INTO `Utilisateurs` (`id`, `nom`, `identifiant`, `mot_de_passe`) VALUES
 --
 
 --
--- Index pour la table `Articles`
+-- Index pour la table `articles`
 --
-ALTER TABLE `Articles`
+ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `utilisateur_id` (`utilisateur_id`);
 
 --
--- Index pour la table `Commentaires`
+-- Index pour la table `commentaires`
 --
-ALTER TABLE `Commentaires`
+ALTER TABLE `commentaires`
   ADD PRIMARY KEY (`id`),
   ADD KEY `article_id` (`article_id`);
 
 --
--- Index pour la table `Types`
+-- Index pour la table `types`
 --
-ALTER TABLE `Types`
+ALTER TABLE `types`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `Utilisateurs`
+-- Index pour la table `utilisateurs`
 --
-ALTER TABLE `Utilisateurs`
+ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -166,40 +168,40 @@ ALTER TABLE `Utilisateurs`
 --
 
 --
--- AUTO_INCREMENT pour la table `Articles`
+-- AUTO_INCREMENT pour la table `articles`
 --
-ALTER TABLE `Articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+ALTER TABLE `articles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT pour la table `Commentaires`
+-- AUTO_INCREMENT pour la table `commentaires`
 --
-ALTER TABLE `Commentaires`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+ALTER TABLE `commentaires`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
 --
--- AUTO_INCREMENT pour la table `Types`
+-- AUTO_INCREMENT pour la table `types`
 --
-ALTER TABLE `Types`
+ALTER TABLE `types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
--- AUTO_INCREMENT pour la table `Utilisateurs`
+-- AUTO_INCREMENT pour la table `utilisateurs`
 --
-ALTER TABLE `Utilisateurs`
+ALTER TABLE `utilisateurs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --
 
 --
--- Contraintes pour la table `Articles`
+-- Contraintes pour la table `articles`
 --
-ALTER TABLE `Articles`
-  ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`utilisateur_id`) REFERENCES `Utilisateurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `articles`
+  ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `Commentaires`
+-- Contraintes pour la table `commentaires`
 --
-ALTER TABLE `Commentaires`
-  ADD CONSTRAINT `commentaires_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `Articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `commentaires`
+  ADD CONSTRAINT `commentaires_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
